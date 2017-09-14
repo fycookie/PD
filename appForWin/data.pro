@@ -30,16 +30,16 @@ SOURCES += \
     LoginDialog.cpp \
     RegisterDialog.cpp \
     UserInfo.cpp \
-    ViewDialog.cpp
+    MainWindow.cpp
 
 HEADERS += \
     LoginDialog.h \
     RegisterDialog.h \
     RegisterDialog.h \
     UserInfo.h \
-    ViewDialog.h
+    MainWindow.h
 
 FORMS += \
     LoginDialog.ui \
     RegisterDialog.ui \
-    ViewDialog.ui
+    MainWindow.ui

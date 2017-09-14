@@ -1,7 +1,7 @@
 #ifndef LOGINDIALOG_H
 #define LOGINDIALOG_H
 #include "RegisterDialog.h"
-#include "ViewDialog.h"
+#include "ViewWidget.h"
 #include <QDebug>
 #include <QDialog>
 #include <QPalette>
@@ -10,6 +10,7 @@
 #include <QtSql/QSqlTableModel>
 #include <QtSql/QSqlRecord>
 #include <QtGui/QApplicationStateChangeEvent>
+#include "MainWindow.h"
 
 namespace Ui {
 class LoginDialog;
@@ -26,7 +27,7 @@ public:
     bool JudgeEmpty();
 private:
     Ui::LoginDialog *ui;
-    ViewDialog *view;
+    MainWindow *view;
 private slots:
     void ExitbtnSlot();
     void RegisterbtnSlot();

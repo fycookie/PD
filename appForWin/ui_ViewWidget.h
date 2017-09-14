@@ -18,7 +18,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_ViewWidget
+class Ui_ViewDialog
 {
 public:
 
@@ -26,7 +26,7 @@ public:
     {
         if (ViewWidget->objectName().isEmpty())
             ViewWidget->setObjectName(QStringLiteral("ViewWidget"));
-        ViewWidget->resize(400, 300);
+        ViewWidget->resize(576, 441);
 
         retranslateUi(ViewWidget);
 
@@ -35,13 +35,13 @@ public:
 
     void retranslateUi(QWidget *ViewWidget)
     {
-        ViewWidget->setWindowTitle(QApplication::translate("ViewWidget", "Form", Q_NULLPTR));
+        ViewWidget->setWindowTitle(QApplication::translate("ViewDialog", "Dialog", Q_NULLPTR));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class ViewWidget: public Ui_ViewWidget {};
+    class ViewDialog: public Ui_ViewDialog {};
 } // namespace Ui
 
 QT_END_NAMESPACE

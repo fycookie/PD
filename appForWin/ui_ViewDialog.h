@@ -1,5 +1,5 @@
 /********************************************************************************
-** Form generated from reading UI file 'viewdialog.ui'
+** Form generated from reading UI file 'ViewDialog.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.9.1
 **
@@ -13,8 +13,8 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QDialog>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -22,20 +22,20 @@ class Ui_ViewDialog
 {
 public:
 
-    void setupUi(QDialog *ViewDialog)
+    void setupUi(QWidget *ViewWidget)
     {
-        if (ViewDialog->objectName().isEmpty())
-            ViewDialog->setObjectName(QStringLiteral("ViewDialog"));
-        ViewDialog->resize(400, 300);
+        if (ViewWidget->objectName().isEmpty())
+            ViewWidget->setObjectName(QStringLiteral("ViewWidget"));
+        ViewWidget->resize(576, 441);
 
-        retranslateUi(ViewDialog);
+        retranslateUi(ViewWidget);
 
-        QMetaObject::connectSlotsByName(ViewDialog);
+        QMetaObject::connectSlotsByName(ViewWidget);
     } // setupUi
 
-    void retranslateUi(QDialog *ViewDialog)
+    void retranslateUi(QWidget *ViewWidget)
     {
-        ViewDialog->setWindowTitle(QApplication::translate("ViewDialog", "Dialog", Q_NULLPTR));
+        ViewWidget->setWindowTitle(QApplication::translate("ViewDialog", "Dialog", Q_NULLPTR));
     } // retranslateUi
 
 };

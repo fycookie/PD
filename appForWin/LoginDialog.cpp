@@ -1,7 +1,7 @@
 #include "LoginDialog.h"
 #include "ui_LoginDialog.h"
 #include "UserInfo.h"
-#include "ViewDialog.h"
+#include "MainWindow.h"
 #include <QVBoxLayout>
 #include <QtGui>
 #include <QtSql/QSqlTableModel>
@@ -48,13 +48,18 @@ void LoginDialog::LoginbtnSlot()
     UserInfo user;
     if(user.IsChecked(ui->userNameLine->text(), ui->passwordLine->text()))
     {
-        ViewDialog view(this);
+        view = new MainWindow;
+        connect(view,SIGNAL(toLoginDialog()), this, SLOT(showNormal()));
         this->hide();
-        if(view.exec()==QDialog::Accepted)
-        {
-            this->showNormal();
-        }
-        this->ClearAll();
+        view->show();
+//        connect(this,SIGNAL(toView(QString,QString)),view,SLOT(comeLoginDialog(QString,QString)));
+//        emit toView();
+        return;
+//        if(view.connect()==QWidget::Accepted)
+//        {
+//            this->showNormal();
+//        }
+//       this->ClearAll();
 //        ViewWidget view;
 //        view.show();
     }

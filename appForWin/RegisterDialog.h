@@ -31,7 +31,6 @@ private slots:
     void RegisterbtnSetSlot();
     void TextChanged();
 private:
-    //bool IsRegistered();
     void ClearAll();
     bool InfoCheck();
 };

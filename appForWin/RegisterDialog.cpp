@@ -81,28 +81,6 @@ bool RegisterDialog::InfoCheck()
     return true;
 }
 
-/*bool RegisterDialog::IsRegistered()
-{
-    user->setTable("User");
-    user->select();
-    for(int i=0;i<user->rowCount();i++)
-    {
-        QSqlRecord record=user->record(i);
-        //判断信息已经存在
-         if(record.value(0)==ui->userNameLine->text())
-        {
-            QMessageBox::warning(this,"Warning","User already exist.",QMessageBox::Yes);
-            ui->passwordLine->clear();
-            ui->retypePsdLine->clear();
-            ui->checkCodeLine->clear();
-            this->SetCheckCode();
-            return true;
-        }
-    }
-
-    return false;
-}*/
-
 void RegisterDialog::ReturnbtnSlot()
 {
     this->accept();
@@ -113,17 +91,6 @@ void RegisterDialog::RegisterbtnSetSlot()
     if(InfoCheck())
     {
         UserInfo user;
-//        if(user.IsRegistered(ui->userNameLine->text()))
-//        {
-//            QMessageBox::information(this, "Hint", "This user has been registered.");
-//            return;
-//        }
-//        else
-//        {
-//            ui->registerbtn->setEnabled(true);
-//            user.AddUser(ui->userNameLine->text(), ui->passwordLine->text());
-//            ReturnbtnSlot();
-//        }
         ui->registerbtn->setEnabled(true);
         user.AddUser(ui->userNameLine->text(), ui->passwordLine->text());
         ReturnbtnSlot();

@@ -33,9 +33,6 @@ SOURCES += \
     RegisterDialog.cpp \
     UserInfo.cpp \
     MainWindow.cpp \
-    FileManage.cpp \
-    FileViewerDialog.cpp \
-    DataHandle.cpp \
     qcustomplot.cpp
 
 HEADERS += \
@@ -44,9 +41,6 @@ HEADERS += \
     RegisterDialog.h \
     UserInfo.h \
     MainWindow.h \
-    FileManage.h \
-    FileViewerDialog.h \
-    DataHandle.h \
     qcustomplot.h
 
 FORMS += \

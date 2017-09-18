@@ -52,16 +52,7 @@ void LoginDialog::LoginbtnSlot()
         connect(view,SIGNAL(toLoginDialog()), this, SLOT(showNormal()));
         this->hide();
         view->show();
-//        connect(this,SIGNAL(toView(QString,QString)),view,SLOT(comeLoginDialog(QString,QString)));
-//        emit toView();
         return;
-//        if(view.connect()==QWidget::Accepted)
-//        {
-//            this->showNormal();
-//        }
-//       this->ClearAll();
-//        ViewWidget view;
-//        view.show();
     }
     else
     {

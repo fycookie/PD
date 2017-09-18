@@ -27,16 +27,6 @@
      <string>Raw Data</string>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>10</y>
-      <width>211</width>
-      <height>201</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="filterDataBtn">
     <property name="geometry">
      <rect>
@@ -48,6 +38,16 @@
     </property>
     <property name="text">
      <string>Filter Data</string>
+    </property>
+   </widget>
+   <widget class="QCustomPlot" name="widgetplot" native="true">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>20</y>
+      <width>391</width>
+      <height>241</height>
+     </rect>
     </property>
    </widget>
   </widget>
@@ -87,6 +87,14 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

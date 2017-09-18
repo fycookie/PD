@@ -3,8 +3,10 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
-#include <FileManage.h>
-#include "FileViewerDialog.h"
+#include <vector>
+#include <string>
+
+using namespace std;
 
 namespace Ui {
 class MainWindow;
@@ -20,14 +22,11 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    FileManage *fm;
-    FileViewerDialog *fvd;
 
 private slots:
     void fileOpen();
-
-private:
-    void DrawRawData();
+    void drawRawData();
+    void drawFilterData();
 
 private:
     struct Coordinate

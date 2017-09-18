@@ -14,11 +14,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setMaximumSize(600,400);
+    this->setMaximumSize(600,350);
     this->setMinimumSize(400,300);
     ui->rawDataPlotBtn->setEnabled(false);
+    ui->widgetplot->setVisible(false);
+    ui->filterDataBtn->setEnabled(false);
     connect(ui->actionOpen,SIGNAL(triggered()),this,SLOT(fileOpen()));
-    connect(ui->rawDataPlotBtn,SIGNAL(clicked()),this,SLOT(DrawRawData()));
+    connect(ui->rawDataPlotBtn,SIGNAL(clicked()),this,SLOT(drawRawData()));
+    connect(ui->filterDataBtn,SIGNAL(clicked()),this,SLOT(drawFilterData()));
 }
 
 MainWindow::~MainWindow()
@@ -61,7 +64,9 @@ void MainWindow::fileOpen()
     string filePath=fileInfo.absoluteFilePath().toStdString();
     if(fileSuffix == "csv")
     {
-        ReadCSV(filePath);
+        int reg = ReadCSV(filePath);
+        if(reg >0)
+            ui->rawDataPlotBtn->setEnabled(true);
     }
 //    else if(fileSuffix == "xlsx")
 //    {
@@ -100,13 +105,15 @@ int MainWindow::ReadCSV(string filePath)
     return coVector.size();
 }
 
-void MainWindow::DrawRawData()
+void MainWindow::drawRawData()
 {
     if(coVector.size()!=0)
     {
-        QCustomPlot *pRawDataPlot=new QCustomPlot(ui->graphicsView);
-        pRawDataPlot->resize(200,300);
-        QVector<double> t(1024),x(1024),y(1024),z(1024);
+        ui->widgetplot->setVisible(true);
+        QCustomPlot *pRawDataPlot=ui->widgetplot;
+        //QCustomPlot *pRawDataPlot=new QCustomPlot(ui->widgetplot);
+        //pRawDataPlot->resize(200,300);
+        QVector<double> t(10000),x(10000),y(10000),z(10000);
         int i=0;
         for(auto item:coVector)
         {
@@ -136,10 +143,28 @@ void MainWindow::DrawRawData()
 
         pRawDataPlot->xAxis->setLabel("t/s");
         pRawDataPlot->yAxis->setLabel("a/mm");
-        pRawDataPlot->setBackground(QColor(50,50,50));
+        QFont xFont=pRawDataPlot->xAxis->labelFont();
+        xFont.setPixelSize(20);
+        pRawDataPlot->xAxis->setLabelFont(xFont);
+        QFont yFont = pRawDataPlot->yAxis->labelFont();
+        yFont.setPixelSize(20);
+        pRawDataPlot->yAxis->setLabelFont(yFont);
+        pRawDataPlot->setBackground(QColor(100,150,50));
+        pRawDataPlot->rescaleAxes();
+        pRawDataPlot->xAxis->setRange(0,100);
+        pRawDataPlot->yAxis->setRange(-800,800);
+        pRawDataPlot->replot();
+        pRawDataPlot->show();
     }
 }
 
+void MainWindow::drawFilterData()
+{
+    if(coVector.size()>0)
+    {
+
+    }
+}
 
 
 

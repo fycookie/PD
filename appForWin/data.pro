@@ -8,7 +8,9 @@ QT       += core gui
 
 QT += sql
 
-QT += widgets
+QT += widgets printsupport
+
+QT += axcontainer
 
 TARGET = data
 TEMPLATE = app
@@ -30,16 +32,25 @@ SOURCES += \
     LoginDialog.cpp \
     RegisterDialog.cpp \
     UserInfo.cpp \
-    MainWindow.cpp
+    MainWindow.cpp \
+    FileManage.cpp \
+    FileViewerDialog.cpp \
+    DataHandle.cpp \
+    qcustomplot.cpp
 
 HEADERS += \
     LoginDialog.h \
     RegisterDialog.h \
     RegisterDialog.h \
     UserInfo.h \
-    MainWindow.h
+    MainWindow.h \
+    FileManage.h \
+    FileViewerDialog.h \
+    DataHandle.h \
+    qcustomplot.h
 
 FORMS += \
     LoginDialog.ui \
     RegisterDialog.ui \
-    MainWindow.ui
+    mainwindow.ui \
+    mainwindow.ui

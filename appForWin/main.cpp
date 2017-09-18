@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include "UserInfo.h"
+#include "MainWindow.h"
 
 int main(int argc, char *argv[])
 {
@@ -31,7 +32,11 @@ int main(int argc, char *argv[])
 //        qDebug()<<db.lastError();
 //        QMessageBox::information(NULL, "Warnning", "connect sql server failed!", QMessageBox::Yes);
 //    }
-    LoginDialog w;
-    w.show();
+
+
+//    LoginDialog w;
+//    w.show();
+    MainWindow m;
+    m.show();
     return a.exec();
 }

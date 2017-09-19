@@ -40,13 +40,118 @@
      <string>Filter Data</string>
     </property>
    </widget>
-   <widget class="QCustomPlot" name="widgetplot" native="true">
+   <widget class="QCustomPlot" name="widgetplotX" native="true">
     <property name="geometry">
      <rect>
       <x>130</x>
       <y>20</y>
-      <width>391</width>
-      <height>241</height>
+      <width>571</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <widget class="QPushButton" name="xAxisBtn">
+     <property name="geometry">
+      <rect>
+       <x>500</x>
+       <y>60</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>X Axis</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QCustomPlot" name="widgetplotY" native="true">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>130</y>
+      <width>571</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <widget class="QPushButton" name="yAxisBtn">
+     <property name="geometry">
+      <rect>
+       <x>500</x>
+       <y>60</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Y Axis</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QCustomPlot" name="widgetplotZ" native="true">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>240</y>
+      <width>571</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <widget class="QPushButton" name="zAxisBtn">
+     <property name="geometry">
+      <rect>
+       <x>500</x>
+       <y>60</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Z Axis</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="resetBtn">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Reset</string>
+    </property>
+   </widget>
+   <widget class="QCustomPlot" name="widgetplotO" native="true">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>350</y>
+      <width>571</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <widget class="QPushButton" name="oAxisBtn">
+     <property name="geometry">
+      <rect>
+       <x>500</x>
+       <y>60</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>O Axis</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QCustomPlot" name="widgetPlotZoom" native="true">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>19</y>
+      <width>571</width>
+      <height>411</height>
      </rect>
     </property>
    </widget>

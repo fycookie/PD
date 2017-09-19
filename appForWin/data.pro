@@ -33,7 +33,9 @@ SOURCES += \
     RegisterDialog.cpp \
     UserInfo.cpp \
     MainWindow.cpp \
-    qcustomplot.cpp
+    qcustomplot.cpp \
+    FFTCode.cpp \
+    FIRFilterCode.cpp
 
 HEADERS += \
     LoginDialog.h \
@@ -41,7 +43,10 @@ HEADERS += \
     RegisterDialog.h \
     UserInfo.h \
     MainWindow.h \
-    qcustomplot.h
+    qcustomplot.h \
+    FFTCode.h \
+    FIRFilterCode.h \
+    constants.h
 
 FORMS += \
     LoginDialog.ui \

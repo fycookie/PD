@@ -5,6 +5,9 @@
 #include <QFileDialog>
 #include <vector>
 #include <string>
+#include "firfilter.h"
+#include <QRubberBand>
+#include "qcustomplot.h"
 
 using namespace std;
 
@@ -21,12 +24,14 @@ public:
     ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
-
-private slots:
-    void fileOpen();
-    void drawRawData();
-    void drawFilterData();
+    enum DrawType{xAxisRawData,
+                  yAxisRawData,
+                  zAxisRawData,
+                  oAxisRawData,
+                  xAxisFilted,
+                  yAxisFilted,
+                  zAxisFilted,
+                  oAxisFilted};
 
 private:
     struct Coordinate
@@ -57,6 +62,45 @@ private:
     string fileName;
     string filePath;
     string fileSuffix;
+
+private:
+    Ui::MainWindow *ui;
+    vector<double> FirCoeff;
+    vector<double> Signal;
+    vector<double> FirResult;
+    vector<double> tVectorRawData;
+    vector<double> xVectorRawData;
+    vector<double> yVectorRawData;
+    vector<double> zVectorRawData;
+    vector<double> xVectorFilted;
+    vector<double> yVectorFilted;
+    vector<double> zVectorFilted;
+
+    QRubberBand *rubberBand;
+    QPoint rubberOrigin;
+
+private:
+    void drawRawData();
+
+private:
+    void FIRCall();
+    void Convolution(DrawType type, vector<double> RawData);
+    void Zoom(vector<double> xx,
+              vector<double> yy);
+    void DrawData(QCustomPlot *plot,
+                     vector<double> xx,
+                     vector<double> yy);
+
+private slots:
+    void mouseMove(QMouseEvent* mevent);
+    void mousePress(QMouseEvent* mevent);
+    void mouseRelease(QMouseEvent *mevent);
+    void slotBtn();
+
+    void fileOpen();
+    void drawRawDataSlot();
+    void drawFilterData();
+    void drawWithZoom(DrawType type);
 };
 
 #endif // MAINWINDOW_H

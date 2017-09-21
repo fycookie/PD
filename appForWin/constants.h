@@ -1,7 +1,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-#define NUM_SAMPLES 2048
+#define NUM_SAMPLES 4096
 #define M_LN2       0.693147180559945309417 // log(2) = ln(2)
 #define LOG_OF_TWO  0.301029995663981184    // log10(2)
 #define ARC_DB_HALF 0.316227766016837952
@@ -20,6 +20,7 @@
 
 #define M_E         2.71828182845904523536      // natural e
 #define M_PI        3.14159265358979323846      // Pi
+#define PI        3.14159265358979323846      // Pi
 #define M_2PI	    6.28318530717958647692      // 2*Pi
 #define M_PI_2      1.57079632679489661923      // Pi/2
 #define M_PI_4      0.785398163397448309616     // Pi/4

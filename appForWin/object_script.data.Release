@@ -1,0 +1,15 @@
+INPUT(
+./release\main.o
+./release\LoginDialog.o
+./release\RegisterDialog.o
+./release\UserInfo.o
+./release\MainWindow.o
+./release\qcustomplot.o
+./release\FFTCode.o
+./release\FIRFilterCode.o
+./release\cfft.o
+./release\moc_LoginDialog.o
+./release\moc_RegisterDialog.o
+./release\moc_MainWindow.o
+./release\moc_qcustomplot.o
+);

@@ -33,7 +33,6 @@ int main(int argc, char *argv[])
 //        QMessageBox::information(NULL, "Warnning", "connect sql server failed!", QMessageBox::Yes);
 //    }
 
-
 //    LoginDialog w;
 //    w.show();
     MainWindow m;

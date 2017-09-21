@@ -46,11 +46,17 @@ int IsValidFFTSize(int N)
 // The output values are returned in the Input arrays.
 // TTransFormType is either FORWARD or INVERSE (defined in the header file)
 // 256 pts in 50 us
-void FFT(double *InputR, double *InputI, int N, TTransFormType Type)
+void FFT(double *InputR, double *InputI, int N, bool flag)
 {
  int j, LogTwoOfN, *RevBits;
  double *BufferR, *BufferI, *TwiddleR, *TwiddleI;
  double OneOverN;
+
+ TTransFormType Type;
+ if(flag)
+     Type=FORWARD;
+ else
+     Type=INVERSE;
 
  // Verify the FFT size and type.
  LogTwoOfN = IsValidFFTSize(N);

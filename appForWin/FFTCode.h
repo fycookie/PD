@@ -19,7 +19,8 @@
 
  int RequiredFFTSize(int NumPts);
  int IsValidFFTSize(int x);
- void FFT(double *InputR, double *InputI, int N, TTransFormType Type);
+ //void FFT(double *InputR, double *InputI, int N, TTransFormType Type);
+ void FFT(double *InputR, double *InputI, int N, bool flag);
  void ReArrangeInput(double *InputR, double *InputI, double *BufferR, double *BufferI, int *RevBits, int N);
  void FillTwiddleArray(double *TwiddleR, double *TwiddleI, int N, TTransFormType Type);
  void Transform(double *InputR, double *InputI, double *BufferR, double *BufferI, double *TwiddleR, double *TwiddleI, int N);

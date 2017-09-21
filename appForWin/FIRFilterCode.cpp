@@ -365,6 +365,7 @@ void AdjustDelay(double *FirCoeff, int NumTaps, double Delay)
  for(j=0; j<NumTaps; j++)FFTInputR[j] = FirCoeff[j];        // Fill the real part with the FIR coeff.
 
  FFT(FFTInputR, FFTInputI, FFTSize, FORWARD);              // Do an FFT
+ FFT(FFTInputR, FFTInputI, FFTSize, true);
  for(j=0; j<=FFTSize/2; j++)                               // Apply the Laplace Delay operator e^(-j*omega*Delay).
   {
    Arg = -Delay * (double)j / (double)FFTSize * M_2PI;     // This is -Delay * (the FFT bin frequency).
@@ -378,7 +379,8 @@ void AdjustDelay(double *FirCoeff, int NumTaps, double Delay)
    FFTInputI[FFTSize-j] = -FFTInputI[j];
   }
 
- FFT(FFTInputR, FFTInputI, FFTSize, INVERSE); // Inverse FFT
+ //FFT(FFTInputR, FFTInputI, FFTSize, INVERSE); // Inverse FFT
+ FFT(FFTInputR, FFTInputI, FFTSize, false);
  for(j=0; j<NumTaps; j++)
   {
    FirCoeff[j] = FFTInputR[j];

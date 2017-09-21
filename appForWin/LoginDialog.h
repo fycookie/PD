@@ -1,7 +1,6 @@
 #ifndef LOGINDIALOG_H
 #define LOGINDIALOG_H
 #include "RegisterDialog.h"
-#include "ViewWidget.h"
 #include <QDebug>
 #include <QDialog>
 #include <QPalette>

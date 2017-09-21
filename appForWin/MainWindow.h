@@ -31,7 +31,19 @@ private:
                   xAxisFilted,
                   yAxisFilted,
                   zAxisFilted,
-                  oAxisFilted};
+                  oAxisFilted,
+                  xAxisFFT,
+                  yAxisFFT,
+                  zAxisFFT,
+                  oAxisFFT};
+
+    enum AxisType{
+        xAxis,yAxis,zAxis,oAxis
+    };
+
+    enum FFTType{
+        xFFT,yFFT,zFFT,oFFT
+    };
 
 private:
     struct Coordinate
@@ -62,6 +74,7 @@ private:
     string fileName;
     string filePath;
     string fileSuffix;
+    QButtonGroup *plotGroup;
 
 private:
     Ui::MainWindow *ui;
@@ -75,16 +88,21 @@ private:
     vector<double> xVectorFilted;
     vector<double> yVectorFilted;
     vector<double> zVectorFilted;
+    vector<double> xVectorFFT;
+    vector<double> yVectorFFT;
+    vector<double> zVectorFFT;
+    vector<double> oVectorFFT;
+    vector<double> xxFFT;
 
     QRubberBand *rubberBand;
     QPoint rubberOrigin;
 
 private:
-    void drawRawData();
+
 
 private:
     void FIRCall();
-    void Convolution(DrawType type, vector<double> RawData);
+    //void Convolution(DrawType type, vector<double> RawData);
     void Zoom(vector<double> xx,
               vector<double> yy);
     void DrawData(QCustomPlot *plot,
@@ -98,9 +116,27 @@ private slots:
     void slotBtn();
 
     void fileOpen();
-    void drawRawDataSlot();
-    void drawFilterData();
+    void rdbtnSlot();
+    //void axisSelect(AxisType type);
     void drawWithZoom(DrawType type);
+    //void drawRawData();
+    //void drawFiltedData();
+    void axisX();
+    void axisY();
+    void axisZ();
+    void axisO();
+
+private:
+    void drawRawData();
+    void drawFiltedData();
+    void Convolution();
+    void FFTData(vector<double> &DataVector);
+    void drawFFT();
+    void DrawFFTAxis(QCustomPlot *plot,
+                     vector<double> xx,
+                     vector<double> yy);
+    void MYFFT(vector<double> A, int N, bool ifft);
+    int SAMPLE=256;
 };
 
 #endif // MAINWINDOW_H

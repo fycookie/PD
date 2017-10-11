@@ -60,6 +60,7 @@ public:
         centralWidget = new QWidget(LoginDialog);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         centralWidget->setGeometry(QRect(0, 0, 337, 236));
+        centralWidget->setStyleSheet(QStringLiteral("./icon/login_map.jpg"));
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(60, 40, 241, 41));

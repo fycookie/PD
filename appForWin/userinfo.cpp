@@ -3,10 +3,14 @@
 #include "QtSql/QSqlQuery"
 #include <QMessageBox>
 #include <QVariant>
+#include <QVariantList>
 #include <QDebug>
 #include <QtSql/QSqlQueryModel>
 #include <QtSql/QSqlRecord>
 #include <QtSql/QSqlTableModel>
+#include <iostream>
+#include <QDateTime>
+#include <vector>
 
 UserInfo::UserInfo()
 {
@@ -102,12 +106,7 @@ bool UserInfo::IsChecked(QString userName, QString password)
     CloseDatabase();
     qDebug()<<"Cannot find user";
     return false;
-
-
-
-
-
-
+}
 
 
 //    QString str = QString("SELECT uPswd FROM PDUser WHERE uName = %1").arg(userName);
@@ -118,14 +117,9 @@ bool UserInfo::IsChecked(QString userName, QString password)
 
 //    str=query.value(0).toString();
 
-
 //    qDebug()<<"result: " <<query.result();
 //    qDebug()<<"value(0): " <<query.value(0);
 //    qDebug()<<"record(0): " <<query.boundValue(0).toString();
-
-
-
-
 
 //    if(query.value(0) == password)
 //    {
@@ -137,7 +131,7 @@ bool UserInfo::IsChecked(QString userName, QString password)
 //        qDebug()<<"check fail";
 //        return false;
 //    }
-}
+//}
 
 void UserInfo::AddUser(QString userName, QString password)
 {
@@ -212,4 +206,133 @@ void UserInfo::DeleteUser()
 
 //    QSqlQuery query("DELETE FROM PDUser WHERE userName = this->Users.userName");
 //    query.exec();
+}
+
+//void UserInfo::AddFeatures(Features data)
+//{
+//    if(!OpenDatabase())
+//        return;
+
+//    QSqlQuery query;
+//    QString str;
+//    str="select *from sys.tables where name='PDFeatures'";
+//    query.exec(str);
+//    if(!query.next())
+//    {
+//        qDebug()<<"table not exsit.";
+//        CloseDatabase();
+//        return;
+//    }
+//    else
+//    {
+//         qDebug()<<"yes, it exist.";
+//    }
+
+//    QSqlQuery qInsert;
+//    qInsert.prepare("insert into PDFeatures values("
+//                    "?,?,?,?,?,?,?,?,?)");
+//    QDataStream ins;
+//    //ins.append(data.datetime);
+//    ins>>data.datetime>>data.MEAN>>data.RMS>>
+//         data.VAR>>data.StdDev>>data.FreqMean>>
+//         data.SigPower>>data.SigEntropy;
+
+//    qInsert.addBindValue(ins);
+
+//    int reg=query.numRowsAffected();
+//    if(reg > 0)
+//    {
+//        qDebug()<<"Add successfully: "<<reg;
+//    }
+//    else
+//    {
+//        qDebug()<<"Add fail";
+//    }
+
+//    CloseDatabase();
+//}
+
+void UserInfo::AddFeatures(Features *data)
+{
+    if(!OpenDatabase())
+        return;
+
+    QSqlTableModel model;
+    model.setTable("PDFeatures");
+    int reg1=model.rowCount();
+    data->datetime=QDateTime::currentDateTime().toString(
+                "yyyy-MM-dd hh:mm:ss");
+    QSqlRecord record=model.record();
+    record.setValue("DateAndTime",data->datetime);
+    record.setValue("MeanAmp",data->MEAN);
+    record.setValue("RootMeanSqure",data->RMS);
+    record.setValue("StdDev",data->StdDev);
+    record.setValue("Variance",data->VAR);
+    record.setValue("FreqPeak",data->FreqMean);
+    record.setValue("FreqMean",data->FreqPeak);
+    record.setValue("SigPower",data->SigPower);
+    record.setValue("SigEntropy",data->SigEntropy);
+    model.insertRecord(-1,record);
+    model.submitAll();
+
+    int reg2=model.rowCount();
+    if(reg2-reg1 > 0)
+    {
+        QMessageBox::information(NULL, "Hint",
+              "Save successfully!",QMessageBox::Yes);
+//        qDebug()<<"Add successfully: "<<reg2-reg1;
+    }
+    else
+    {
+        qDebug()<<"Add fail";
+    }
+
+    //CloseDatabase();
+}
+
+//void UserInfo::FeaturesTrans(vector<Features> *vec)
+//{
+//    if(LoadFeatures()>0)
+//    {
+//        for(auto item:VectorFeatures)
+//            vec->push_back(item);
+//    }
+//}
+
+void UserInfo::LoadFeatures(vector<Features> *vec)
+{
+    OpenDatabase();
+    QSqlTableModel model;
+    model.setTable("PDFeatures");
+    model.select();
+    for(int i=0; i<model.rowCount(); i++)
+    {
+        QSqlRecord record = model.record(i);
+        if(record.value(1)==0.0 && record.value(2)==0.0
+                &&record.value(3)==0.0 && record.value(4)==0.0
+                &&record.value(5)==0.0 && record.value(6)==0.0
+                &&record.value(7)==0.0 &&record.value(8)==0.0)
+        {
+            CloseDatabase();
+            qDebug()<<"Cannot find user";
+            return;
+        }
+        else
+        {
+            Features featuresNew;
+            featuresNew.datetime=record.value(0).toString();
+            featuresNew.MEAN=record.value(1).toDouble();
+            featuresNew.RMS=record.value(2).toDouble();
+            featuresNew.VAR=record.value(3).toDouble();
+            featuresNew.StdDev=record.value(4).toDouble();
+            featuresNew.FreqMean=record.value(5).toDouble();
+            featuresNew.FreqPeak=record.value(6).toDouble();
+            featuresNew.SigPower=record.value(7).toDouble();
+            featuresNew.SigEntropy=record.value(8).toDouble();
+            vec->push_back(featuresNew);
+        }
+    }
+
+    //CloseDatabase();
+    //return VectorFeatures.size();
 }

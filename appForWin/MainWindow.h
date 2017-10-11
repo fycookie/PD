@@ -1,13 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include <QFileDialog>
 #include <vector>
 #include <string>
-#include "firfilter.h"
 #include <QRubberBand>
 #include "qcustomplot.h"
+#include "editwindow.h"
 
 using namespace std;
 
@@ -24,119 +22,96 @@ public:
     ~MainWindow();
 
 private:
-    enum DrawType{xAxisRawData,
-                  yAxisRawData,
-                  zAxisRawData,
-                  oAxisRawData,
-                  xAxisFilted,
-                  yAxisFilted,
-                  zAxisFilted,
-                  oAxisFilted,
-                  xAxisFFT,
-                  yAxisFFT,
-                  zAxisFFT,
-                  oAxisFFT};
-
-    enum AxisType{
-        xAxis,yAxis,zAxis,oAxis
+    enum PlotType{
+        AxisRawDataX,
+        AxisRawDataY,
+        AxisRawDataZ,
+        AxisRawDataO,
+        AxisFiltedX,
+        AxisFiltedY,
+        AxisFiltedZ,
+        AxisFiltedO,
+        AxisFFTedX,
+        AxisFFTedY,
+        AxisFFTedZ,
+        AxisFFTedO,
+        AxisTXT
     };
-
-    enum FFTType{
-        xFFT,yFFT,zFFT,oFFT
-    };
-
-private:
-    struct Coordinate
-    {
-        double t=0.0;
-        double x=0.0;
-        double y=0.0;
-        double z=0.0;
-        operator=(Coordinate& other)
-        {
-            t=other.t;
-            x=other.x;
-            y=other.y;
-            z=other.z;
-        }
-    };
-    Coordinate coor;
-    vector<Coordinate> coVector;
-
-private:
-    int ReadCSV(string filePath);
-    //void ReadExcel(string filePath);
-    //void ReadTxt(string filePath);
 
 private:
     char buffer[256];
-    string cache;
-    string fileName;
-    string filePath;
-    string fileSuffix;
-    QButtonGroup *plotGroup;
+    int SAMPLE=256;
+    int NumData=12000;
 
 private:
     Ui::MainWindow *ui;
-    vector<double> FirCoeff;
-    vector<double> Signal;
-    vector<double> FirResult;
-    vector<double> tVectorRawData;
-    vector<double> xVectorRawData;
-    vector<double> yVectorRawData;
-    vector<double> zVectorRawData;
-    vector<double> xVectorFilted;
-    vector<double> yVectorFilted;
-    vector<double> zVectorFilted;
-    vector<double> xVectorFFT;
-    vector<double> yVectorFFT;
-    vector<double> zVectorFFT;
-    vector<double> oVectorFFT;
-    vector<double> xxFFT;
-
     QRubberBand *rubberBand;
     QPoint rubberOrigin;
+    QButtonGroup *plotGroup;
+    editwindow *edit;
 
 private:
+    vector<double> VectorT;
+    vector<double> VectorX;
+    vector<double> VectorY;
+    vector<double> VectorZ;
+    vector<double> VectorO;
+    vector<double> VectorRawDataT;
+    vector<double> VectorRawDataX;
+    vector<double> VectorRawDataY;
+    vector<double> VectorRawDataZ;
+    vector<double> VectorRawDataO;
+    vector<double> VectorFilterX;
+    vector<double> VectorFilterY;
+    vector<double> VectorFilterZ;
+    vector<double> VectorFilterO;
+    vector<double> VectorFFTX;
+    vector<double> VectorFFTY;
+    vector<double> VectorFFTZ;
+    vector<double> VectorFFTO;
+    vector<double> VectorFFTT;
 
-
-private:
-    void FIRCall();
-    //void Convolution(DrawType type, vector<double> RawData);
-    void Zoom(vector<double> xx,
-              vector<double> yy);
-    void DrawData(QCustomPlot *plot,
-                     vector<double> xx,
-                     vector<double> yy);
+    vector<double> VectorTxtX;
+    vector<double> VectorTxtY;
 
 private slots:
-    void mouseMove(QMouseEvent* mevent);
-    void mousePress(QMouseEvent* mevent);
-    void mouseRelease(QMouseEvent *mevent);
-    void slotBtn();
-
-    void fileOpen();
-    void rdbtnSlot();
-    //void axisSelect(AxisType type);
-    void drawWithZoom(DrawType type);
-    //void drawRawData();
-    //void drawFiltedData();
-    void axisX();
-    void axisY();
-    void axisZ();
-    void axisO();
+    void SlotMouseMove(QMouseEvent* mevent);
+    void SlotMousePress(QMouseEvent* mevent);
+    void SlotMouseRelease(QMouseEvent *mevent);
+    void SlotResetBtn();
+    void SlotFileOpen();
+    void SlotPlotBtn();
+    void SlotAxisX();
+    void SlotAxisY();
+    void SlotAxisZ();
+    void SlotAxisO();
+    void SlotFeatures();
+    void SlotCutData();
+    void SlotResetInput();
 
 private:
-    void drawRawData();
-    void drawFiltedData();
-    void Convolution();
-    void FFTData(vector<double> &DataVector);
-    void drawFFT();
-    void DrawFFTAxis(QCustomPlot *plot,
-                     vector<double> xx,
-                     vector<double> yy);
-    void MYFFT(vector<double> A, int N, bool ifft);
-    int SAMPLE=256;
+    int ReadCSV(string filePath);
+    int ReadTXT(string filePath);
+    void PlotRawData();
+    void PlotFiltData();
+    void PlotFFTData();
+    void DrawData(QCustomPlot *plot,
+                  vector<double> xx,
+                  vector<double> yy,
+                  PlotType TYPE);
+    void GetFFTData(vector<double> &DataVector,
+                    PlotType TYPE);
+    void ZoomDraw(vector<double> &xx,
+                  vector<double> &yy,
+                  PlotType TYPE);
+    void GetFilterData(const vector<double> &signal,
+              const vector<double> &filter,
+              PlotType TYPE);
+    void Convolution(const vector<double> &signal,
+                     const vector<double> &filter,
+                     PlotType TYPE);
+
+    void DrawDataTXT();
 };
 
 #endif // MAINWINDOW_H

@@ -22,6 +22,9 @@
      <height>236</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">./icon/login_map.jpg</string>
+   </property>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>

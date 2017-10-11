@@ -30,30 +30,37 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
     LoginDialog.cpp \
-    RegisterDialog.cpp \
     UserInfo.cpp \
     MainWindow.cpp \
     qcustomplot.cpp \
-    FFTCode.cpp \
-    FIRFilterCode.cpp \
-    cfft.cpp
+    cfft.cpp \
+    editwindow.cpp \
+    RegisterDialog.cpp \
+    knn.cpp
 
 HEADERS += \
     LoginDialog.h \
     RegisterDialog.h \
-    RegisterDialog.h \
     UserInfo.h \
     MainWindow.h \
     qcustomplot.h \
-    FFTCode.h \
-    FIRFilterCode.h \
-    constants.h \
-    complex.h \
+    FirCoeff.h \
+    editwindow.h \
     cfft.h \
-    tryfft.h
+    complex.h \
+    common.h \
+    knn.h
 
 FORMS += \
     LoginDialog.ui \
     RegisterDialog.ui \
     mainwindow.ui \
-    mainwindow.ui
+    editwindow.ui
+
+DISTFILES += \
+    icon/mean_formula.png \
+    icon/rms_formula.png \
+    icon/standard_formula.png \
+    icon/var_formula.png \
+    icon/login_map.jpg \
+    icon/mainwindow_map.jpg

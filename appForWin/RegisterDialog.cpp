@@ -2,6 +2,7 @@
 #include "ui_RegisterDialog.h"
 #include "UserInfo.h"
 #include <QtGui>
+#include <QPixmap>
 
 RegisterDialog::RegisterDialog(QWidget *parent):
     QDialog(parent),
@@ -33,6 +34,8 @@ RegisterDialog::RegisterDialog(QWidget *parent):
     connect(ui->registerbtn,SIGNAL(clicked()),this,SLOT(RegisterbtnSetSlot()));
     connect(ui->returnbtn,SIGNAL(clicked()),this,SLOT(ReturnbtnSlot()));
     connect(ui->userNameLine,SIGNAL(textChanged(QString)),this,SLOT(TextChanged()));
+
+    this->setStyleSheet("border-image:url(./icon/login_map.jpg)");
 }
 
 void RegisterDialog::TextChanged()
